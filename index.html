@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Night Sky</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: black;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.2; }
+      to { opacity: 1; }
+    }
+
+    .shooting-star {
+      position: absolute;
+      width: 2px;
+      height: 80px;
+      background: linear-gradient(white, transparent);
+      opacity: 0.8;
+      transform: rotate(45deg);
+      animation: shoot 2s ease-in-out forwards;
+    }
+
+    @keyframes shoot {
+      from { top: -100px; left: -100px; }
+      to { top: 100%; left: 100%; opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // Generate random stars
+    for (let i = 0; i < 100; i++) {
+      let star = document.createElement("div");
+      star.className = "star";
+      star.style.top = Math.random() * 100 + "%";
+      star.style.left = Math.random() * 100 + "%";
+      document.body.appendChild(star);
+    }
+
+    // Shooting star every few seconds
+    setInterval(() => {
+      let shootingStar = document.createElement("div");
+      shootingStar.className = "shooting-star";
+      shootingStar.style.top = Math.random() * 50 + "px";
+      shootingStar.style.left = Math.random() * 50 + "px";
+      document.body.appendChild(shootingStar);
+
+      setTimeout(() => shootingStar.remove(), 2000);
+    }, 4000);
+  </script>
+</body>
+</html>
